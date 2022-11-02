@@ -19,7 +19,7 @@ private:
 
     // data handles (owned)
     std::unique_ptr<std::vector<GraphNode *>> _nodes = std::make_unique<std::vector<GraphNode *>>();
-    std::vector<GraphEdge *> _edges;
+    std::unique_ptr<std::vector<GraphEdge *>> _edges = std::make_unique<std::vector<GraphEdge *>>();
 
     ////
     //// EOF STUDENT CODE
