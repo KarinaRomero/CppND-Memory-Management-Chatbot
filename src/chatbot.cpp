@@ -47,10 +47,9 @@ ChatBot::~ChatBot()
 ChatBot::ChatBot(const ChatBot &source)
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
-
-    *_image = *source._image;
-    *_chatLogic = *source._chatLogic;
-    *_rootNode = *source._rootNode;
+    // Copy constructor to deference image https://docs.wxwidgets.org/3.0/classwx_bitmap.html
+    _image = new wxBitmap(*source._image);
+    _chatLogic = source._chatLogic;
 }
 
 ChatBot& ChatBot::operator=(const ChatBot &source)
@@ -61,9 +60,9 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
 
     delete _image, _chatLogic;
 
-    *_image = *source._image;
-    *_chatLogic = *source._chatLogic;
-    *_rootNode = *source._rootNode;
+    // Copy constructor to deference image https://docs.wxwidgets.org/3.0/classwx_bitmap.html
+    _image = new wxBitmap(*source._image);
+    _chatLogic = source._chatLogic;
     return *this;
 }
 
@@ -71,9 +70,8 @@ ChatBot::ChatBot(ChatBot &&source)
 {
     std::cout << "ChatBot Move Constructor" << std::endl;
 
-    *_image = *source._image;
-    *_chatLogic = *source._chatLogic;
-    *_rootNode = *source._rootNode;
+    _image = source._image;
+    _chatLogic = source._chatLogic;
 }
 
 ChatBot& ChatBot::operator=(ChatBot &&source)
@@ -84,9 +82,10 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
 
     delete _image, _chatLogic;
 
-    *_image = *source._image;
-    *_chatLogic = *source._chatLogic;
-    *_rootNode = *source._rootNode;
+    _image = source._image;
+
+    source._image = NULL;
+    _chatLogic = source._chatLogic;
     return *this;
 }
 ////
