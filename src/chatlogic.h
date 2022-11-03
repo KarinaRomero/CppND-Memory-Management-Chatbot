@@ -18,8 +18,14 @@ private:
     ////
 
     // data handles (owned)
-    std::unique_ptr<std::vector<GraphNode *>> _nodes = std::make_unique<std::vector<GraphNode *>>();
-    std::unique_ptr<std::vector<GraphEdge *>> _edges = std::make_unique<std::vector<GraphEdge *>>();
+
+    /* Activity 3 -> Exclusive Ownership: 
+        Convert nodes to unique_ptr. Karina Romero.*/
+    std::vector<std::unique_ptr<GraphNode>> _nodes{};
+
+    /* Activity 4 -> Moving Smart Pointers: 
+        remove edges from here. Karina Romero.*/
+    // std::vector<GraphEdge *> _edges;
 
     ////
     //// EOF STUDENT CODE
