@@ -21,7 +21,7 @@ private:
 
     /* Activity 3 -> Exclusive Ownership: 
         Convert nodes to unique_ptr. Karina Romero.*/
-    std::vector<std::unique_ptr<GraphNode>> _nodes{};
+    std::vector<std::unique_ptr<GraphNode>> _nodes;
 
     /* Activity 4 -> Moving Smart Pointers: 
         remove edges from here. Karina Romero.*/
