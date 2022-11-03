@@ -5,9 +5,9 @@ GraphEdge::GraphEdge(int id)
 {
     _id = id;
 }
-GraphEdge::~GraphEdge() {
+/*GraphEdge::~GraphEdge() {
 
-}
+}*/
 void GraphEdge::SetChildNode(GraphNode *childNode)
 {
     _childNode = childNode;
