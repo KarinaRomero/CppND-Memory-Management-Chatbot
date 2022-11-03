@@ -15,6 +15,7 @@ ChatBot::ChatBot()
     _image = nullptr;
     _chatLogic = nullptr;
     _rootNode = nullptr;
+    _currentNode = nullptr;
 }
 
 // constructor WITH memory allocation
@@ -25,6 +26,7 @@ ChatBot::ChatBot(std::string filename)
     // invalidate data handles
     _chatLogic = nullptr;
     _rootNode = nullptr;
+    _currentNode = nullptr;
 
     // load image into heap memory
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
@@ -44,50 +46,93 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
-ChatBot::ChatBot(const ChatBot &source)
+
+/* Activity 2 -> Rule of five: 
+        following the rules we need to overload: 
+            - copy constructor.
+            - copy assignment operator.
+            - destructor.
+            - move constructor.
+            - move assignment operator.
+        Karina Romero.*/
+
+ChatBot::ChatBot(const ChatBot &source) // Rule 3 Copy constructor
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
+
     // Copy constructor to deference image https://docs.wxwidgets.org/3.0/classwx_bitmap.html
     _image = new wxBitmap(*source._image);
+
+    // Copy data from source
     _chatLogic = source._chatLogic;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
 }
 
-ChatBot& ChatBot::operator=(const ChatBot &source)
+ChatBot& ChatBot::operator=(const ChatBot &source)  // Rule 2 Assigment operator
 {
     std::cout << "ChatBot Assigment Operator" << std::endl;
     if (this == &source)
             return *this;
 
-    delete _image, _chatLogic;
+    delete _image, _chatLogic, _currentNode;
 
     // Copy constructor to deference image https://docs.wxwidgets.org/3.0/classwx_bitmap.html
     _image = new wxBitmap(*source._image);
     _chatLogic = source._chatLogic;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
     return *this;
 }
 
-ChatBot::ChatBot(ChatBot &&source)
+ChatBot::ChatBot(ChatBot &&source) // Rule 4 move constructor
 {
     std::cout << "ChatBot Move Constructor" << std::endl;
-
+    
+    // Copy data from source
     _image = source._image;
     _chatLogic = source._chatLogic;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic->SetChatbotHandle(this);
+
+    // Removing references from source
+    source._image = NULL;
+    source._currentNode = nullptr;
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
 }
 
-ChatBot& ChatBot::operator=(ChatBot &&source)
+ChatBot& ChatBot::operator=(ChatBot &&source) // Rule 5 move assigment operator
 {
     std::cout << "ChatBot Move Assigment Operator" << std::endl;
     if (this == &source)
             return *this;
 
+    if(_currentNode != nullptr)
+        delete _currentNode;
+
     delete _image, _chatLogic;
 
     _image = source._image;
 
-    source._image = NULL;
+    // Copy data from source
     _chatLogic = source._chatLogic;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    
+    // set handler for chatlogic
+   _chatLogic->SetChatbotHandle(this);
+
+    // Removing references from source
+    source._image = NULL;
+    source._currentNode = nullptr;
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
+
     return *this;
 }
+
 ////
 //// EOF STUDENT CODE
 

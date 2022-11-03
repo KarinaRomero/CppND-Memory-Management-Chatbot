@@ -29,12 +29,22 @@ public:
 
     //// STUDENT CODE
     ////
+
+    /* Activity 2 -> Rule of five: 
+        following the rules we need to overload: 
+            - copy constructor.
+            - copy assignment operator.
+            - destructor.
+            - move constructor.
+            - move assignment operator.
+        Karina Romero.*/
+
     ChatBot(const ChatBot &source);  // Rule 3 Copy constructor
     ChatBot& operator=(const ChatBot &source); // Rule 2 Assigment operator
 
     ChatBot(ChatBot &&source);  // Rule 4 move constructor
     ChatBot& operator=(ChatBot &&source); // Rule 5 move assigment operator
-    ////
+   ////
     //// EOF STUDENT CODE
 
     // getters / setters
