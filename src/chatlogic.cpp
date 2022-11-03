@@ -220,7 +220,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
     // identify root node
     GraphNode *rootNode = nullptr;
-    ;
+    
     for (auto it = _nodes.begin(); it != _nodes.end(); ++it)
     {
         // search for nodes which have no incoming edges

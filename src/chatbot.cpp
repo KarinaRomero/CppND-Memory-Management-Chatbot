@@ -60,7 +60,7 @@ ChatBot::ChatBot(const ChatBot &source) // Rule 3 Copy constructor
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
 
-    // Copy constructor to deference image https://docs.wxwidgets.org/3.0/classwx_bitmap.html
+    // Copy the image using the wxBitmap copy constructor https://docs.wxwidgets.org/3.0/classwx_bitmap.html
     _image = new wxBitmap(*source._image);
 
     // Copy data from source
@@ -77,7 +77,7 @@ ChatBot& ChatBot::operator=(const ChatBot &source)  // Rule 2 Assigment operator
 
     delete _image, _chatLogic, _currentNode;
 
-    // Copy constructor to deference image https://docs.wxwidgets.org/3.0/classwx_bitmap.html
+    // Copy the image using the wxBitmap copy constructor https://docs.wxwidgets.org/3.0/classwx_bitmap.html
     _image = new wxBitmap(*source._image);
     _chatLogic = source._chatLogic;
     _currentNode = source._currentNode;
