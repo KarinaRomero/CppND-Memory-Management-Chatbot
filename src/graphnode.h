@@ -3,9 +3,9 @@
 
 #include <vector>
 #include <string>
-#include <memory>
 #include "chatbot.h"
 
+#include <memory>
 
 // forward declarations
 class GraphEdge;
@@ -17,11 +17,14 @@ private:
     ////
 
     // data handles (owned)
-    std::unique_ptr<std::vector<GraphEdge *>> _childEdges = std::make_unique<std::vector<GraphEdge *>>();  // edges to subsequent nodes
+    /* Activity 4 -> Moving Smart Pointers: 
+        converting each graph edge to unique_ptr, 
+        in runtime this instance will be owned. Karina Romero.*/
+    std::vector<std::unique_ptr<GraphEdge>> _childEdges; // edges to subsequent nodes
 
     // data handles (not owned)
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
-    ChatBot *_chatBot;
+    ChatBot _chatBot;
 
     ////
     //// EOF STUDENT CODE
@@ -37,20 +40,20 @@ public:
 
     // getter / setter
     int GetID() { return _id; }
-    int GetNumberOfChildEdges() { return _childEdges->size(); }
+    int GetNumberOfChildEdges() { return _childEdges.size(); }
     GraphEdge *GetChildEdgeAtIndex(int index);
     std::vector<std::string> GetAnswers() { return _answers; }
     int GetNumberOfParents() { return _parentEdges.size(); }
 
     // proprietary functions
     void AddToken(std::string token); // add answers to list
-    void AddEdgeToParentNode(GraphEdge *edge);
-    void AddEdgeToChildNode(GraphEdge *edge);
+    void AddEdgeToParentNode(GraphEdge* edge);
+    void AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge);
 
     //// STUDENT CODE
     ////
 
-    void MoveChatbotHere(ChatBot *chatbot);
+    void MoveChatbotHere(ChatBot chatbot);
 
     ////
     //// EOF STUDENT CODE
